@@ -3,19 +3,10 @@ import java.util.Objects;
 public class Position {
     protected int column;
     protected int row;
-    protected boolean isPlayed = false;
 
     public Position(int row, int column) {
         this.row = row;
         this.column = column;
-    }
-
-    public void play() {
-        isPlayed = true;
-    }
-
-    public void unplay() {
-        isPlayed = false;
     }
 
     @Override
@@ -26,13 +17,23 @@ public class Position {
         return column == position.column && row == position.row;
     }
 
+    public Position getProportionalPositionLeft(int row) {
+        int diff = Math.abs(this.row - row);
+        return new Position(row, this.column - diff);
+    }
+
+    public Position getProportionalPositionRight(int row) {
+        int diff = Math.abs(this.row - row);
+        return new Position(row, this.column + diff);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(column, row);
     }
 
     public boolean isPlayed() {
-        return isPlayed;
+        return true;
     }
 
     public int getColumn() {

@@ -20,7 +20,7 @@ public class EightQueensPuzzle {
 
         for (int column = 0; column < chessboard.getBroadSize(); column++) {
             Position position = new Position(row, column);
-            if(chessboard.isThreatened(position)) {
+            if(chessboard.isQueenThreatened(position)) {
                 continue;
             }
 

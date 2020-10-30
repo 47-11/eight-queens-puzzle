@@ -8,7 +8,7 @@ public class ChessboardPrinter {
     public void print() {
         printHeader();
 
-        for (int row = 0; row < chessboard.getQueenPositions().length; row++) {
+        for (int row = 0; row < chessboard.getPositions().length; row++) {
             printRow(row);
         }
     }
@@ -16,7 +16,7 @@ public class ChessboardPrinter {
     private void printHeader() {
         System.out.print("  ");
 
-        for (int row = 0; row < chessboard.getQueenPositions().length; row++) {
+        for (int row = 0; row < chessboard.getPositions().length; row++) {
             System.out.print(" " + (row + 1) + " ");
         }
 
@@ -26,7 +26,7 @@ public class ChessboardPrinter {
     private void printRow(int row) {
         System.out.print((row + 1) + " ");
 
-        for (int column = 0; column < chessboard.getQueenPositions().length; column++) {
+        for (int column = 0; column < chessboard.getPositions().length; column++) {
             printCell(new Position(row, column));
         }
 

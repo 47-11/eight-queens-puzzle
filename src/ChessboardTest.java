@@ -13,7 +13,7 @@ class ChessboardTest {
 
     @Test
     void isSet() {
-        this.chessboard.set(4, 3);
+        this.chessboard.play(4, 3);
 
         assertTrue(this.chessboard.isSet(4, 3));
         assertFalse(this.chessboard.isSet(3, 4));
@@ -21,24 +21,24 @@ class ChessboardTest {
 
     @Test
     void columnHasPiece() {
-        this.chessboard.set(4, 3);
+        this.chessboard.play(4, 3);
 
-        assertTrue(this.chessboard.columnHasPiece(3));
-        assertFalse(this.chessboard.columnHasPiece(4));
+        assertTrue(this.chessboard.isQueenInColumn(3));
+        assertFalse(this.chessboard.isQueenInColumn(4));
     }
 
     @Test
     void diagonalHasPiece() {
-        this.chessboard.set(2, 3);
+        this.chessboard.play(2, 3);
 
-        assertTrue(this.chessboard.diagonalHasPiece(1, 2));
-        assertTrue(this.chessboard.diagonalHasPiece(4, 1));
-        assertTrue(this.chessboard.diagonalHasPiece(7, 8));
-        assertTrue(this.chessboard.diagonalHasPiece(2, 3));
+        assertTrue(this.chessboard.isQueenInDiagonal(1, 2));
+        assertTrue(this.chessboard.isQueenInDiagonal(4, 1));
+        assertTrue(this.chessboard.isQueenInDiagonal(7, 8));
+        assertTrue(this.chessboard.isQueenInDiagonal(2, 3));
 
-        assertFalse(this.chessboard.diagonalHasPiece(1, 3));
-        assertFalse(this.chessboard.diagonalHasPiece(6, 5));
-        assertFalse(this.chessboard.diagonalHasPiece(2, 2));
+        assertFalse(this.chessboard.isQueenInDiagonal(1, 3));
+        assertFalse(this.chessboard.isQueenInDiagonal(6, 5));
+        assertFalse(this.chessboard.isQueenInDiagonal(2, 2));
     }
 
 

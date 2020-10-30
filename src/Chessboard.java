@@ -1,15 +1,15 @@
 import java.util.Arrays;
 
 public class Chessboard {
-    private static int size = 8;
-    private final int[] board = new int[size];
+    private final static int size = 8;
+    private final int[] queens = new int[size];
 
     public Chessboard() {
         reset();
     }
 
     public void reset() {
-        Arrays.fill(board, -1);
+        Arrays.fill(queens, -1);
     }
 
     public boolean isSet(int row, int column) {
@@ -17,7 +17,7 @@ public class Chessboard {
             return false;
         }
 
-        return board[row] == column;
+        return queens[row] == column;
     }
 
     private boolean outOfBoard(int row, int column) {
@@ -33,21 +33,21 @@ public class Chessboard {
     }
 
     public boolean isThreatened(int row, int column) {
-        return isThreatenendInRow(row)
-                || isThreatenendInColumn(column)
-                || isThreatenedDiagonal(row, column);
+        return isQueenInRow(row)
+                || isQueenInColumn(column)
+                || isQueenInDiagonal(row, column);
     }
 
-    public boolean isThreatenendInRow(int row) {
-        return board[row] != -1;
+    public boolean isQueenInRow(int row) {
+        return queens[row] != -1;
     }
 
-    public boolean isThreatenendInColumn(int column) {
-        return Arrays.stream(this.board).anyMatch(cell -> cell == column);
+    public boolean isQueenInColumn(int column) {
+        return Arrays.stream(this.queens).anyMatch(cell -> cell == column);
     }
 
-    public boolean isThreatenedDiagonal(int row, int column) {
-        for(int candidateRow = 0; candidateRow < board.length; candidateRow++) {
+    public boolean isQueenInDiagonal(int row, int column) {
+        for(int candidateRow = 0; candidateRow < queens.length; candidateRow++) {
             int diff = Math.abs(row - candidateRow);
 
             if(isSet(candidateRow, column - diff)) {
@@ -63,12 +63,12 @@ public class Chessboard {
     }
 
     public void play(int row, int column) {
-        board[row] = column;
+        queens[row] = column;
     }
 
     public void unplay(int row, int column) {
-        if(board[row] == column) {
-            board[row] = -1;
+        if(queens[row] == column) {
+            queens[row] = -1;
         }
     }
 
@@ -76,40 +76,11 @@ public class Chessboard {
         return size;
     }
 
+    public int[] getQueens() {
+        return this.queens;
+    }
 
     public void print() {
-        printHeader();
-
-        for (int row = 0; row < board.length; row++) {
-            printRow(row);
-        }
-    }
-
-    private void printHeader() {
-        System.out.print("  ");
-
-        for (int row = 0; row < board.length; row++) {
-            System.out.print(" " + (row + 1) + " ");
-        }
-
-        System.out.println();
-    }
-
-    private void printRow(int row) {
-        System.out.print((row + 1) + " ");
-
-        for (int column = 0; column < board.length; column++) {
-            printCell(row, column);
-        }
-
-        System.out.println();
-    }
-
-    private void printCell(int row, int column) {
-        if (isSet(row, column)) {
-            System.out.print(" x ");
-        } else {
-            System.out.print(" - ");
-        }
+        new ChessboardPrinter(this).print();
     }
 }

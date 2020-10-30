@@ -34,17 +34,11 @@ public class Chessboard {
         return Arrays.stream(positions).anyMatch(p -> p.getColumn() == column);
     }
 
-    public boolean isQueenInDiagonal(Position position) {
-        for (int candidateRow = 0; candidateRow < positions.length; candidateRow++) {
-            if(isRowDiagonalToPosition(candidateRow, position)) {
-                return true;
-            }
-        }
-
-        return false;
+    public boolean isQueenInDiagonal(Position candidate) {
+        return Arrays.stream(positions).anyMatch(p -> hasDiagonalInRow(p.getRow(), candidate));
     }
 
-    private boolean isRowDiagonalToPosition(int row, Position position) {
+    private boolean hasDiagonalInRow(int row, Position position) {
         return isSet(position.getProportionalPositionLeft(row))
                 || isSet(position.getProportionalPositionRight(row));
     }
